@@ -27,3 +27,4 @@ def emotion_detector(text_to_analyse):
             "dominant_emotion": "joy"
         }
     return emotions
+

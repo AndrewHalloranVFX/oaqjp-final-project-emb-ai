@@ -1,5 +1,5 @@
-from EmotionDetection.emotion_detection import emotion_detector
 import unittest
+from EmotionDetection.emotion_detection import emotion_detector
 
 class TestEmotionDetector(unittest.TestCase):
     def test_emotion_detector(self):
@@ -18,4 +18,5 @@ class TestEmotionDetector(unittest.TestCase):
         result_5 = emotion_detector('I am really afraid that this will happen')
         self.assertEqual(result_5, 'fear')
 
-unittest.main()
+if __name__ == '__main__':
+    unittest.main()
