@@ -11,7 +11,6 @@ def sent_detector():
     emotions = emotion_detector(text_to_analyze)
 
     return jsonify(emotions)
-    return jsonify(dominant_emotion)
 
     if not text_to_analyze:
         return jsonify({"error": "Invalid Text! Please Try Again"}), 400
