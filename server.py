@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, json, jsonify
+from flask import Flask, render_template, request, jsonify
 from EmotionDetection.emotion_detection import emotion_detector
 
 app = Flask("Emotion Detector")
@@ -14,7 +14,7 @@ def sent_detector():
     return jsonify(dominant_emotion)
 
     if not text_to_analyze:
-        return jsonify({"error": "No text provided"}), 400
+        return jsonify({"error": "Invalid Text! Please Try Again"}), 400
 
 @app.route("/")
 def render_index_page():

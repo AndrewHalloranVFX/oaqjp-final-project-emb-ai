@@ -43,8 +43,10 @@ def emotion_detector(text_to_analyse):
             'fear': 0,
             'joy': 0,
             'sadness': 0,
-            'dominant_emotion': 'unknown'
+            'dominant_emotion': 'unknown',
+            'Invalid text! Please try again!': 400
         }
+        
 
     """emotions = {}
     if "emotion_scores" in response_dict:
