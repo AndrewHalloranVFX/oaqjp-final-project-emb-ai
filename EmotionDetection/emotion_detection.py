@@ -11,11 +11,42 @@ def emotion_detector(text_to_analyse):
 
     response = requests.post(url, headers=headers, json=input_json)
 
-    return response.text
+    #return response.text
 
-    response.dict = response.json()
+    response_dict = response.json()
 
-    emotions = {}
+        # Ensure the expected structure is present
+    if ("emotionPredictions" in response_dict and
+            len(response_dict["emotionPredictions"]) > 0 and
+            "emotion" in response_dict["emotionPredictions"][0]):
+        
+        # Extract emotion scores
+        emotion_scores = response_dict["emotionPredictions"][0]["emotion"]
+
+        # Find the dominant emotion by the highest score
+        dominant_emotion = max(emotion_scores, key=emotion_scores.get)
+
+        # Return the formatted dictionary
+        return {
+            'anger': emotion_scores.get('anger', 0),
+            'disgust': emotion_scores.get('disgust', 0),
+            'fear': emotion_scores.get('fear', 0),
+            'joy': emotion_scores.get('joy', 0),
+            'sadness': emotion_scores.get('sadness', 0),
+            'dominant_emotion': dominant_emotion
+        }
+    else:
+        # If the expected structure is missing, return an error or empty response
+        return {
+            'anger': 0,
+            'disgust': 0,
+            'fear': 0,
+            'joy': 0,
+            'sadness': 0,
+            'dominant_emotion': 'unknown'
+        }
+
+    """emotions = {}
     if "emotion_scores" in response_dict:
         emotions_data = response_dict["emotion_scores"]
         emotions = {
@@ -26,5 +57,19 @@ def emotion_detector(text_to_analyse):
             "sadness": emotions_data.get("sadness", 0),
             "dominant_emotion": dominant_emotion
         }
-    return emotions
+    return emotions"""
+
+    """
+    #Extracting emotion score
+    if "emotionPredictions" in response_dict:
+        emotions = response_dict["emotionPredictions"][0]["emotion"]
+
+        #Find emotion with highest score
+        dominant_emotion = max(emotions, key=emotions.get)
+
+        return dominant_emotion #Return only the dominant emotion as a string
+
+    #Fallback if expected structure is not present
+    return None
+    """
 
